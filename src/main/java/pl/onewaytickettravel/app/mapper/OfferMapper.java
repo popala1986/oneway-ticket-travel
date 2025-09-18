@@ -15,7 +15,6 @@ public class OfferMapper {
         offer.setId(offerDto.getId());
         offer.setName(offerDto.getName());
         offer.setPrice(offerDto.getPrice());
-        offer.setUserName(offerDto.getUserName());
         offer.setContinent(continent);
         return offer;
     }
@@ -27,10 +26,9 @@ public class OfferMapper {
         dto.setId(offer.getId());
         dto.setName(offer.getName());
         dto.setPrice(offer.getPrice());
-        dto.setUserName(offer.getUserName());
 
         if (offer.getContinent() != null) {
-            dto.setContinentId(offer.getContinent().getId());
+            // Usunięto setContinentId()
             dto.setContinentName(offer.getContinent().getName());
         }
 

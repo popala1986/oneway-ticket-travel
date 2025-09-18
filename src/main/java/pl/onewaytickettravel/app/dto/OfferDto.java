@@ -8,20 +8,15 @@ public class OfferDto {
     private Long id;
     private String name;
     private BigDecimal price;
-    private String userName;
-    private Long continentId;
     private String continentName;
 
     public OfferDto() {
     }
 
-    public OfferDto(Long id, String name, BigDecimal price, String userName,
-                    Long continentId, String continentName) {
-        this.id = id;
+    public OfferDto(String name, Long id, BigDecimal price, String continentName) {
         this.name = name;
+        this.id = id;
         this.price = price;
-        this.userName = userName;
-        this.continentId = continentId;
         this.continentName = continentName;
     }
 
@@ -47,22 +42,6 @@ public class OfferDto {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Long getContinentId() {
-        return continentId;
-    }
-
-    public void setContinentId(Long continentId) {
-        this.continentId = continentId;
     }
 
     public String getContinentName() {

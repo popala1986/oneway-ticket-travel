@@ -24,11 +24,6 @@ public class Offer implements Serializable {
     @Digits(integer = 10, fraction = 2, message = "Price can have up to 10 digits before the decimal and 2 after")
     private BigDecimal price;
 
-    @Column(name = "user_name", nullable = false, length = 100)
-    @NotBlank(message = "Username must not be blank")
-    @Size(max = 100, message = "Username can have a maximum of 100 characters")
-    private String userName;
-
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "continent_id", nullable = false)
     private Continent continent;
@@ -36,10 +31,9 @@ public class Offer implements Serializable {
     public Offer() {
     }
 
-    public Offer(String name, BigDecimal price, String userName, Continent continent) {
+    public Offer(String name, BigDecimal price, Continent continent) {
         this.name = name;
         this.price = price;
-        this.userName = userName;
         this.continent = continent;
     }
 
@@ -65,14 +59,6 @@ public class Offer implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public Continent getContinent() {
@@ -102,7 +88,6 @@ public class Offer implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", userName='" + userName + '\'' +
                 ", continent=" + (continent != null ? continent.getId() : null) +
                 '}';
     }
