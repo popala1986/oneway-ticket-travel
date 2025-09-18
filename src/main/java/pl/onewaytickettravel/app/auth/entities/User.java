@@ -1,4 +1,4 @@
-package pl.onewaytickettravel.app.auth;
+package pl.onewaytickettravel.app.auth.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
