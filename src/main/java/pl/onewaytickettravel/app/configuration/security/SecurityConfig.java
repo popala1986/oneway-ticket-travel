@@ -44,6 +44,7 @@ public class SecurityConfig {
                                 "/js/**",
                                 "/images/**",
                                 "/ws/**",
+                                "/search",
                                 "/csrf-token"
                         ).permitAll()
                         .anyRequest().authenticated()
