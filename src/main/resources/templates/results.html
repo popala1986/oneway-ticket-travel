@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Wyniki Wyszukiwania</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .offer-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .offer-card h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        .offer-card p {
+            margin: 5px 0;
+        }
+        .price {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Wyniki Wyszukiwania</h1>
+
+<div th:if="${#lists.isEmpty(results)}">
+    <p>Przepraszamy, nie znaleziono ofert pasujących do podanych kryteriów.</p>
+    <p><a th:href="@{/}">Spróbuj ponownie</a></p>
+</div>
+
+<div th:unless="${#lists.isEmpty(results)}">
+    <p>Znaleziono <span th:text="${#lists.size(results)}">X</span> ofert:</p>
+
+    <div th:each="offer : ${results}" class="offer-card">
+        <h2 th:text="${offer.name}">Nazwa Wycieczki</h2>
+
+        <p>Cena: <span class="price" th:text="${#numbers.formatCurrency(offer.price)}">1999.00 PLN</span></p>
+
+        <p>Kontynent: <span th:text="${offer.continentName}">Europa</span></p>
+
+        <p th:if="${offer.countryName != null}">
+            Kraj: <span th:text="${offer.countryName}">Japonia</span>
+        </p>
+
+        <p><a th:href="@{'/offers/' + ${offer.id}}">Zobacz szczegóły &rarr;</a></p>
+    </div>
+</div>
+
+</body>
+</html>

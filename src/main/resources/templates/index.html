@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>One Way Ticket Travel - Wyszukiwarka Wycieczek</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        .search-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 900px;
+        }
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            align-items: end;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input, .search-button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .search-button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+            height: 40px;
+        }
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-container">
+    <h1>Znajdź swoją wymarzoną podróż</h1>
+
+    <form th:action="@{/search}" th:object="${searchFilter}" method="post" class="search-form">
+
+        <div class="form-group">
+            <label for="destination">Kontynent:</label>
+            <input type="text" id="destination" th:field="*{destination}" placeholder="np. Azja, Europa">
+        </div>
+
+        <div class="form-group">
+            <label for="countryName">Kraj:</label>
+            <input type="text" id="countryName" th:field="*{countryName}" placeholder="np. Japonia, Polska">
+        </div>
+
+        <div class="form-group">
+            <label for="startDate">Data wylotu (od):</label>
+            <input type="date" id="startDate" th:field="*{startDate}">
+        </div>
+
+        <div class="form-group">
+            <label for="numberOfAdults">Liczba osób:</label>
+            <input type="number" id="numberOfAdults" th:field="*{numberOfAdults}" min="1" value="1">
+        </div>
+
+        <div class="form-group">
+            <label for="departureCity">Miasto wylotu:</label>
+            <input type="text" id="departureCity" th:field="*{departureCity}" placeholder="np. Warszawa">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="search-button">Szukaj</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
