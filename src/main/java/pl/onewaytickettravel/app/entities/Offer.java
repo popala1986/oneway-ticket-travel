@@ -28,6 +28,10 @@ public class Offer implements Serializable {
     @JoinColumn(name = "continent_id", nullable = false)
     private Continent continent;
 
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+
     public Offer() {
     }
 
@@ -69,6 +73,14 @@ public class Offer implements Serializable {
         this.continent = continent;
     }
 
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -88,7 +100,8 @@ public class Offer implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", continent=" + (continent != null ? continent.getId() : null) +
+                ", continent=" + (continent != null ? continent.getName() : "null") +
+                ", country=" + (country != null ? country.getName() : "null") +
                 '}';
     }
 }
