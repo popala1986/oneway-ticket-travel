@@ -9,7 +9,7 @@
 - Spring Data JPA
 - Hibernate
 - Thymeleaf
-- H2 / MySQL (configurable)
+- MySQL 
 - Maven
 
 ## 🧭 Features
