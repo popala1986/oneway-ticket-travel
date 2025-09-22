@@ -40,18 +40,31 @@
 src/
 └── main/
     ├── java/pl/onewaytickettravel/app/
-    │   ├── controller/        → Spring MVC controllers
-    │   ├── service/           → Business logic
-    │   ├── repository/        → JPA repositories
-    │   ├── entities/          → JPA entities
-    │   ├── dto/               → Data Transfer Objects
-    │   ├── mapper/            → Entity ↔ DTO mapping
-    │   ├── specification/     → Dynamic filtering logic
-    │   └── model/             → Search filter object
+    │   ├── controller/
+    │   ├── service/
+    │   ├── repository/
+    │   ├── entities/
+    │   ├── dto/
+    │   ├── mapper/
+    │   ├── specification/
+    │   └── model/
     └── resources/
-        ├── templates/         → Thymeleaf views (`index.html`, `results.html`)
-        ├── schema.sql         → Database schema
-        └── data.sql           → Sample data
+        ├── templates/
+        ├── schema.sql
+        └── data.sql
+        
+📁 Folder Descriptions
+●  controller/ – Spring MVC controllers
+● service/ – Business logic
+● repository/ – JPA repositories
+● entities/ – JPA entities
+● dto/ – Data Transfer Objects
+● mapper/ – Entity ↔ DTO mapping
+● specification/ – Dynamic filtering logic
+● model/ – Search filter object
+● templates/ – Thymeleaf views (index.html, results.html)
+● schema.sql – Database schema
+● data.sql – Sample data
 
 🛠️ Sample Data:
 The data.sql file includes sample continents, countries, cities, and travel offers — for example, “Italy Sun & Pizza” with destination city “Rome”.
