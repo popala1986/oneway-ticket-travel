@@ -44,6 +44,7 @@ public class SearchController {
 
     @PostMapping("/search")
     public String handleSearch(@ModelAttribute SearchFilter searchFilter, Model model) {
+        System.out.println("🔍 Miasto z formularza: " + searchFilter.getCityName());
         List<OfferDto> results = offerService.searchOffers(searchFilter);
         model.addAttribute("results", results);
         model.addAttribute("filterUsed", searchFilter);

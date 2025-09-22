@@ -9,18 +9,20 @@ public class SearchFilter {
     private Integer numberOfAdults;
     private String departureCity;
     private String countryName;
+    private String cityName;
 
 
 
     public SearchFilter() {
     }
 
-    public SearchFilter(String destination, String countryName, String departureCity, Integer numberOfAdults, LocalDate startDate) {
+    public SearchFilter(String destination, LocalDate startDate, Integer numberOfAdults, String departureCity, String countryName, String cityName) {
         this.destination = destination;
-        this.countryName = countryName;
-        this.departureCity = departureCity;
-        this.numberOfAdults = numberOfAdults;
         this.startDate = startDate;
+        this.numberOfAdults = numberOfAdults;
+        this.departureCity = departureCity;
+        this.countryName = countryName;
+        this.cityName = cityName;
     }
 
     public String getDestination() {
@@ -64,5 +66,11 @@ public class SearchFilter {
         this.countryName = countryName;
     }
 
+    public String getCityName() {
+        return cityName;
+    }
 
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 }

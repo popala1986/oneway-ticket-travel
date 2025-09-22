@@ -40,6 +40,15 @@ public class OfferSpecification implements Specification<Offer> {
                     "%" + countryName + "%"
             ));
         }
+
+        if (filter.getCityName() != null && !filter.getCityName().isBlank()) {
+            String cityName = filter.getCityName().trim().toLowerCase();
+            System.out.println("✅ Dodano filtr po mieście: " + cityName);
+            predicates.add(builder.like(
+                    builder.lower(root.get("city").get("name")),
+                    "%" + cityName + "%"
+            ));
+        }
         return builder.and(predicates.toArray(new Predicate[0]));
     }
 }

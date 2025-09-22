@@ -3,11 +3,13 @@ package pl.onewaytickettravel.app.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.onewaytickettravel.app.dto.OfferDto;
+import pl.onewaytickettravel.app.entities.City;
 import pl.onewaytickettravel.app.entities.Continent;
 import pl.onewaytickettravel.app.entities.Country;
 import pl.onewaytickettravel.app.entities.Offer;
 import pl.onewaytickettravel.app.mapper.OfferMapper;
 import pl.onewaytickettravel.app.model.SearchFilter;
+import pl.onewaytickettravel.app.repository.CityRepository;
 import pl.onewaytickettravel.app.repository.ContinentRepository;
 import pl.onewaytickettravel.app.repository.CountryRepository;
 import pl.onewaytickettravel.app.repository.OfferRepository;
@@ -25,15 +27,17 @@ public class OfferService {
     private final ContinentRepository continentRepository;
     private final CountryRepository countryRepository;
     private final OfferMapper offerMapper;
+    private final CityRepository cityRepository;
 
     public OfferService(OfferRepository offerRepository,
                         ContinentRepository continentRepository,
                         CountryRepository countryRepository,
-                        OfferMapper offerMapper) {
+                        OfferMapper offerMapper, CityRepository cityRepository) {
         this.offerRepository = offerRepository;
         this.continentRepository = continentRepository;
         this.countryRepository = countryRepository;
         this.offerMapper = offerMapper;
+        this.cityRepository = cityRepository;
     }
 
     /**
@@ -49,11 +53,33 @@ public class OfferService {
      */
 
 
+//    @Transactional(readOnly = true)
+//    public List<OfferDto> searchOffers(SearchFilter filter) {
+//        OfferSpecification spec = new OfferSpecification(filter);
+//
+//        return offerRepository.findAll(spec).stream()
+//                .map(offerMapper::offerToOfferDto)
+//                .collect(Collectors.toList());
+//    }
+
     @Transactional(readOnly = true)
     public List<OfferDto> searchOffers(SearchFilter filter) {
         OfferSpecification spec = new OfferSpecification(filter);
 
-        return offerRepository.findAll(spec).stream()
+        // 🔍 Loguj wartość miasta z filtra
+        System.out.println("🧭 Miasto docelowe z filtra: " + filter.getCityName());
+
+        // 🔍 Pobierz oferty przed mapowaniem do DTO
+        List<Offer> rawOffers = offerRepository.findAll(spec);
+
+        // 🔍 Loguj każdą ofertę i jej miasto
+        System.out.println("📦 Oferty po filtrze:");
+        rawOffers.forEach(o -> {
+            String city = (o.getCity() != null) ? o.getCity().getName() : "brak miasta";
+            System.out.println("→ " + o.getName() + " | Miasto: " + city);
+        });
+
+        return rawOffers.stream()
                 .map(offerMapper::offerToOfferDto)
                 .collect(Collectors.toList());
     }
@@ -80,7 +106,13 @@ public class OfferService {
                     .orElseThrow(() -> new NoSuchElementException("Country with name " + offerDto.getCountryName() + " not found."));
         }
 
-        Offer offerToSave = offerMapper.offerDtoToOffer(offerDto, continent, country);
+        City city = null;
+        if (offerDto.getCityName() != null && !offerDto.getCityName().isBlank()) {
+            city = cityRepository.findByNameIgnoreCase(offerDto.getCityName())
+                    .orElseThrow(() -> new NoSuchElementException("City with name " + offerDto.getCityName() + " not found."));
+        }
+
+        Offer offerToSave = offerMapper.offerDtoToOffer(offerDto, continent, country,city);
         Offer savedOffer = offerRepository.save(offerToSave);
 
         return offerMapper.offerToOfferDto(savedOffer);
