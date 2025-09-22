@@ -28,17 +28,23 @@ public class Offer implements Serializable {
     @JoinColumn(name = "continent_id", nullable = false)
     private Continent continent;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
 
     public Offer() {
     }
 
-    public Offer(String name, BigDecimal price, Continent continent) {
+    public Offer(String name, BigDecimal price, Continent continent, Country country, City city) {
         this.name = name;
         this.price = price;
         this.continent = continent;
+        this.country = country;
+        this.city = city;
     }
 
     public Long getId() {
@@ -81,10 +87,18 @@ public class Offer implements Serializable {
         this.country = country;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Offer)) return false;
         Offer offer = (Offer) o;
         return Objects.equals(id, offer.id);
     }
@@ -102,6 +116,7 @@ public class Offer implements Serializable {
                 ", price=" + price +
                 ", continent=" + (continent != null ? continent.getName() : "null") +
                 ", country=" + (country != null ? country.getName() : "null") +
+                ", city=" + (city != null ? city.getName() : "null") +
                 '}';
     }
 }

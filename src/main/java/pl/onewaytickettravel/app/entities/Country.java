@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -23,6 +24,9 @@ public class Country implements Serializable {
     @ManyToOne
     @JoinColumn(name = "continent_id")
     private Continent continent;
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<City> cities;
 
     public Country(Long id, String name, Continent continent) {
         this.id = id;
