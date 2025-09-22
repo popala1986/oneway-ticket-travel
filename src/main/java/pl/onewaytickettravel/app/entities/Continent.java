@@ -44,10 +44,16 @@ public class Continent implements Serializable {
         return name;
     }
 
-
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Country> getCountryList() {
+        return countryList;
+    }
+
+    public void setCountryList(List<Country> countryList) {
+        this.countryList = countryList;
     }
 
     @Override
