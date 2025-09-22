@@ -1,6 +1,6 @@
 # ✈️ One Way Ticket Travel
 
-**One Way Ticket Travel** is a web application built with Spring Boot that allows users to search for travel offers using dynamic filters such as continent, country, destination city, departure date, and number of travelers.
+**One Way Ticket Travel** is a web application built with Spring Boot that allows users to search for travel offers using dynamic filters such as continent, country, destination city.
 
 ## 📦 Technologies Used
 
@@ -89,6 +89,7 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 ● Sorting by price and date
 ● City autocomplete
 ● REST API support
+● Search offers by hotel type, departure date, and number of travelers 
 
 👨‍💻 Author
 Created by Paweł Popala
