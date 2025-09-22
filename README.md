@@ -18,9 +18,6 @@
   - Continent
   - Country
   - Destination city
-  - Departure date
-  - Number of adults
-  - Departure city *(coming soon)*
 - 📄 Dynamic filtering using `Specification`
 - 🗺️ Entity-to-DTO mapping
 - 🧪 Sample data via `schema.sql` and `data.sql`
