@@ -70,7 +70,7 @@ src/
 The data.sql file includes sample continents, countries, cities, and travel offers — for example, “Italy Sun & Pizza” with destination city “Rome”.
 
 📌 Project Status:
-✅ Core functionality implemented 🔜 Upcoming features:
+✅ Core functionality implemented
 
 🔜 Upcoming features:
 ● Pagination of results
