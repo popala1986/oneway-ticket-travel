@@ -54,6 +54,10 @@
             Kraj: <span th:text="${offer.countryName}">Japonia</span>
         </p>
 
+        <p th:if="${offer.cityName != null}">
+            Miasto: <span th:text="${offer.cityName}">Bangkok</span>
+        </p>
+
         <p><a th:href="@{'/offers/' + ${offer.id}}">Zobacz szczegóły &rarr;</a></p>
     </div>
 </div>
