@@ -15,6 +15,7 @@ import pl.onewaytickettravel.app.repository.CountryRepository;
 import pl.onewaytickettravel.app.repository.OfferRepository;
 import pl.onewaytickettravel.app.specification.OfferSpecification;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;

@@ -8,6 +8,7 @@ public class SearchFilter {
     private LocalDate startDate;
     private Integer numberOfAdults;
     private String departureCity;
+    private String continentName;
     private String countryName;
     private String cityName;
 
@@ -16,11 +17,12 @@ public class SearchFilter {
     public SearchFilter() {
     }
 
-    public SearchFilter(String destination, LocalDate startDate, Integer numberOfAdults, String departureCity, String countryName, String cityName) {
+    public SearchFilter(String destination, LocalDate startDate, Integer numberOfAdults, String departureCity, String continentName, String countryName, String cityName) {
         this.destination = destination;
         this.startDate = startDate;
         this.numberOfAdults = numberOfAdults;
         this.departureCity = departureCity;
+        this.continentName = continentName;
         this.countryName = countryName;
         this.cityName = cityName;
     }
@@ -72,5 +74,13 @@ public class SearchFilter {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
+    }
+
+    public String getContinentName() {
+        return continentName;
+    }
+
+    public void setContinentName(String continentName) {
+        this.continentName = continentName;
     }
 }
