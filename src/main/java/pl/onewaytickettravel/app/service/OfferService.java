@@ -52,28 +52,10 @@ public class OfferService {
      * @return List of matching offers in DTO format.
      */
 
-
-//    @Transactional(readOnly = true)
-//    public List<OfferDto> searchOffers(SearchFilter filter) {
-//        OfferSpecification spec = new OfferSpecification(filter);
-//
-//        return offerRepository.findAll(spec).stream()
-//                .map(offerMapper::offerToOfferDto)
-//                .collect(Collectors.toList());
-//    }
-
     @Transactional(readOnly = true)
     public List<OfferDto> searchOffers(SearchFilter filter) {
         OfferSpecification spec = new OfferSpecification(filter);
-
-        // 🔍 Loguj wartość miasta z filtra
-        System.out.println("🧭 Miasto docelowe z filtra: " + filter.getCityName());
-
-        // 🔍 Pobierz oferty przed mapowaniem do DTO
         List<Offer> rawOffers = offerRepository.findAll(spec);
-
-        // 🔍 Loguj każdą ofertę i jej miasto
-        System.out.println("📦 Oferty po filtrze:");
         rawOffers.forEach(o -> {
             String city = (o.getCity() != null) ? o.getCity().getName() : "brak miasta";
             System.out.println("→ " + o.getName() + " | Miasto: " + city);
