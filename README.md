@@ -11,6 +11,7 @@
 - Thymeleaf
 - MySQL 
 - Maven
+- Spring AOP (Aspect-Oriented Programming)
 
 ## 🧭 Features
 
@@ -22,7 +23,15 @@
 - 🗺️ Entity-to-DTO mapping
 - 🧪 Sample data via `schema.sql` and `data.sql`
 - 🎨 Clean and responsive UI with search form and results view
+- 📊 Transparent logging and performance monitoring via AOP aspects
 
+🔍 Application Monitoring with Aspects
+To improve observability and debugging, the application includes three dedicated aspects:
+  ● OfferControllerAspect Logs form input, measures execution time of the controller, and captures exceptions
+  ● OfferServiceAspect Logs search filters, tracks method duration, and logs errors in business logic
+  ● OfferMapperAspect Logs entity input, measures DTO mapping time, and handles mapping exceptions
+  ● These aspects provide transparent logging, performance metrics, and error tracking across the core layers of the application — without modifying business logic.
+  
 ## 🚀 Getting Started
 
 1. Clone the repository:
@@ -47,7 +56,8 @@ src/
     │   ├── dto/
     │   ├── mapper/
     │   ├── specification/
-    │   └── model/
+    │   ├── model/
+    │   └── aspect/
     └── resources/
         ├── templates/
         ├── schema.sql
@@ -62,6 +72,7 @@ src/
 ● mapper/ – Entity ↔ DTO mapping
 ● specification/ – Dynamic filtering logic
 ● model/ – Search filter object
+● aspect/ – AOP aspects for logging and performance
 ● templates/ – Thymeleaf views (index.html, results.html)
 ● schema.sql – Database schema
 ● data.sql – Sample data
@@ -71,6 +82,7 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 
 📌 Project Status:
 ✅ Core functionality implemented
+✅ AOP aspects for controller, service, and mapper added
 
 🔜 Upcoming features:
 ● Pagination of results
