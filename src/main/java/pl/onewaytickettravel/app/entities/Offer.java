@@ -2,6 +2,7 @@ package pl.onewaytickettravel.app.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -35,6 +36,10 @@ public class Offer implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OfferStatus status = OfferStatus.AVAILABLE;
 
     public Offer() {
     }
@@ -93,6 +98,14 @@ public class Offer implements Serializable {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public OfferStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OfferStatus status) {
+        this.status = status;
     }
 
     @Override
