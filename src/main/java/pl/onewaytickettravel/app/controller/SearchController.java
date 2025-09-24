@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.onewaytickettravel.app.dto.OfferDto;
 import pl.onewaytickettravel.app.model.SearchFilter;
 import pl.onewaytickettravel.app.service.OfferService;
-
 import java.util.List;
 
 @Controller
