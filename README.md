@@ -1,5 +1,5 @@
 ✈️ One Way Ticket Travel
-One Way Ticket Travel is a web application built with Spring Boot that allows users to search for travel offers using dynamic filters such as continent, country, and destination city. Users can reserve offers, view confirmation details, and enjoy a clean, responsive interface.
+One Way Ticket Travel is a web application built with Spring Boot that allows users to search for travel offers using dynamic filters such as continent, country, destination city, and price range. Users can reserve offers, view confirmation details, and enjoy a clean, responsive interface. The application also exposes a REST API documented via Swagger UI for seamless integration and testing.
 
 ## 📦 Technologies Used
 
@@ -11,6 +11,9 @@ One Way Ticket Travel is a web application built with Spring Boot that allows us
 - MySQL 
 - Maven
 - Spring AOP (Aspect-Oriented Programming)
+- Swagger UI (OpenAPI 3)
+- Spring Security
+
 
 ## 🧭 Features
 
@@ -18,6 +21,7 @@ One Way Ticket Travel is a web application built with Spring Boot that allows us
   - Continent
   - Country
   - Destination city
+  - Price range (minPrice, maxPrice)
 - 📄 Dynamic filtering using `Specification`
 - 🗺️ Entity-to-DTO mapping
 - 🧪 Sample data via `schema.sql` and `data.sql`
@@ -25,10 +29,12 @@ One Way Ticket Travel is a web application built with Spring Boot that allows us
 - 📊 Transparent logging and performance monitoring via AOP aspects
 - ✅ Offer reservation system with status tracking (AVAILABLE, RESERVED, CANCELLED)
 - 📩 Reservation confirmation view with offer details
-🔁 Return-to-search navigation after booking
-⚠️ Styled alert for empty search results
-🔐 Foreign key-safe database reset logic
-🧹 Auto-reset of sample data on startup
+- 🔁 Return-to-search navigation after booking
+- ⚠️ Styled alert for empty search results
+- 🔐 Foreign key-safe database reset logic
+- 🧹 Auto-reset of sample data on startup
+- 🌐 Public REST API with Swagger documentation
+
 
 🔍 Application Monitoring with Aspects
 To improve observability and debugging, the application includes three dedicated aspects:
@@ -36,6 +42,20 @@ To improve observability and debugging, the application includes three dedicated
   ● OfferServiceAspect Logs search filters, tracks method duration, and logs errors in business logic
   ● OfferMapperAspect Logs entity input, measures DTO mapping time, and handles mapping exceptions
   ● These aspects provide transparent logging, performance metrics, and error tracking across the core layers of the application — without modifying business logic.
+
+
+  🌐 REST API Endpoints
+Publicly accessible via Spring Security and documented in Swagger UI:
+
+OfferRestController
+  ● GET /api/offers → returns all available offers
+  ● POST /api/offers/search → filters offers based on SearchFilter criteria
+
+ReservationRestController
+  ● POST /api/reservations/reserve/{offerId} → reserves an offer for the authenticated user
+
+Swagger UI: http://localhost:8080/swagger-ui/index.html
+
   
 ## 🚀 Getting Started
 
@@ -55,6 +75,7 @@ src/
 └── main/
     ├── java/pl/onewaytickettravel/app/
     │   ├── controller/
+    │   ├── restController/
     │   ├── service/
     │   ├── repository/
     │   ├── entities/
@@ -70,6 +91,7 @@ src/
         
 📁 Folder Descriptions
 ●  controller/ – Spring MVC controllers
+● restController/ – REST API endpoints
 ● service/ – Business logic
 ● repository/ – JPA repositories
 ● entities/ – JPA entities
@@ -91,6 +113,8 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 ✅ Reservation system with confirmation view
 ✅ Styled empty results alert
 ✅ Safe database reset logic
+✅ REST API with Swagger documentation
+✅ Price range filtering in search form and backend
 
 🔜 Upcoming features:
 ● Pagination of results
