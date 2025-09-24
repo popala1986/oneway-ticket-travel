@@ -19,12 +19,11 @@ public class OfferServiceAspect {
 
     @Before("execution(* pl.onewaytickettravel.app.service.OfferService.searchOffers(..)) && args(filter,..)")
     public void logSearchInput(SearchFilter filter) {
-        log.info("🔍 SearchFilter received: continent={}, country={}, city={}, date={}, adults={}",
+        log.info("🔍 SearchFilter received: continent={}, country={}, city={}",
                 filter.getContinentName(),
                 filter.getCountryName(),
-                filter.getCityName(),
-                filter.getStartDate(),
-                filter.getNumberOfAdults());
+                filter.getCityName());
+
     }
 
     /**
