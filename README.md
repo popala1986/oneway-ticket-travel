@@ -93,7 +93,9 @@ The application includes centralized exception handling for cleaner API response
 
 src/
 └── main/
+
     ├── java/pl/onewaytickettravel/app/
+    
     │   ├── controller/
     │   ├── restController/
     │   ├── service/
