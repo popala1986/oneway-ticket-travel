@@ -24,8 +24,8 @@ public class OfferSpecification implements Specification<Offer> {
         List<Predicate> predicates = new ArrayList<>();
 
 
-        if (filter.getDestination() != null && !filter.getDestination().isBlank()) {
-            String continentName = filter.getDestination().trim().toLowerCase();
+        if (filter.getContinentName() != null && !filter.getContinentName().isBlank()) {
+            String continentName = filter.getContinentName().trim().toLowerCase();
             predicates.add(builder.like(
                     builder.lower(root.get("continent").get("name")),
                     "%" + continentName + "%"
@@ -43,12 +43,20 @@ public class OfferSpecification implements Specification<Offer> {
 
         if (filter.getCityName() != null && !filter.getCityName().isBlank()) {
             String cityName = filter.getCityName().trim().toLowerCase();
-            System.out.println("✅ Dodano filtr po mieście: " + cityName);
             predicates.add(builder.like(
                     builder.lower(root.get("city").get("name")),
                     "%" + cityName + "%"
             ));
         }
+
+        if (filter.getMinPrice() != null && filter.getMaxPrice() != null) {
+            predicates.add(builder.between(root.get("price"), filter.getMinPrice(), filter.getMaxPrice()));
+        } else if (filter.getMinPrice() != null) {
+            predicates.add(builder.greaterThanOrEqualTo(root.get("price"), filter.getMinPrice()));
+        } else if (filter.getMaxPrice() != null) {
+            predicates.add(builder.lessThanOrEqualTo(root.get("price"), filter.getMaxPrice()));
+        }
+
         return builder.and(predicates.toArray(new Predicate[0]));
     }
 }
