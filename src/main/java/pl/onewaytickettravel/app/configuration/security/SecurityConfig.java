@@ -19,7 +19,6 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -37,15 +36,20 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authenticationProvider(authenticationProvider())
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**")) // lub .disable() dla testów
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/", "/login", "/search", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers(
+                                "/api/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/css/**", "/js/**", "/images/**"
+                        ).permitAll()
+                        .requestMatchers("/", "/search", "/reservations/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .usernameParameter("email")
+                        .usernameParameter("email") // nadal używamy email jako login
+                        .defaultSuccessUrl("/", true) // przekierowanie po zalogowaniu
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
