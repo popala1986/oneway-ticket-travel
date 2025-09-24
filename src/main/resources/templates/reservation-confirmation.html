@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Potwierdzenie Rezerwacji</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f8f9fa;
+        }
+        .confirmation-box {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div th:if="${reservationSuccess}" class="confirmation-box">
+    <h2>✅ Gratulacje!</h2>
+    <p>Zarezerwowałeś: <strong th:text="${reservedOfferName}">[nazwa]</strong></p>
+    <p>Miasto: <span th:text="${reservedOfferCity}">[miasto]</span></p>
+    <p>Cena: <span th:text="${#numbers.formatCurrency(reservedOfferPrice)}">[cena]</span></p>
+</div>
+
+<a th:href="@{/}" class="back-button">← Powrót do wyszukiwania</a>
+
+</body>
+</html>
