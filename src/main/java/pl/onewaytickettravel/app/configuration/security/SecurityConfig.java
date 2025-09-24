@@ -33,20 +33,14 @@ public class SecurityConfig {
         return authProvider;
     }
 
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authenticationProvider(authenticationProvider())
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**")) // lub .disable() dla testów
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/",
-                                "/login",
-                                "/css/**",
-                                "/js/**",
-                                "/images/**",
-                                "/ws/**",
-                                "/search",
-                                "/csrf-token"
-                        ).permitAll()
+                        .requestMatchers("/api/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/", "/login", "/search", "/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -54,8 +48,7 @@ public class SecurityConfig {
                         .usernameParameter("email")
                         .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll
-                );
+                .logout(LogoutConfigurer::permitAll);
 
         return http.build();
     }
