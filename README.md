@@ -143,11 +143,17 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 
 📌 Project Status:
 ✅ Core functionality implemented
+
 ✅ AOP aspects for controller, service, and mapper added
+
 ✅ Reservation system with confirmation view
+
 ✅ Styled empty results alert
+
 ✅ Safe database reset logic
+
 ✅ REST API with Swagger documentation
+
 ✅ Price range filtering in search form and backend
 
 🔜 Upcoming features:
