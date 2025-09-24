@@ -157,12 +157,19 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 ✅ Price range filtering in search form and backend
 
 🔜 Upcoming features:
+
 ● Pagination of results
+
 ● Sorting by price and date
+
 ● City autocomplete
+
 ● REST API support
+
 ● Search offers by hotel type, departure date, and number of travelers 
+
 ● User authentication and personalized reservations
+
 ● Admin panel for managing offers and reservations
 
 
