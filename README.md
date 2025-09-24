@@ -52,6 +52,7 @@ Publicly accessible via Spring Security and documented in Swagger UI:
 OfferRestController
 
   ● GET /api/offers → returns all available offers
+  
   ● POST /api/offers/search → filters offers based on SearchFilter criteria
 
   ● GET /admin/offers?offerName=... → returns a single offer matching the provided name
