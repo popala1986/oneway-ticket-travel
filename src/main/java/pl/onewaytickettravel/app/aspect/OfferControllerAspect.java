@@ -19,14 +19,13 @@ public class OfferControllerAspect {
 
     @Before("execution(* pl.onewaytickettravel.app.controller.OfferController.handleSearch(..)) && args(filter,..)")
     public void logFormInput(SearchFilter filter) {
-        log.info("🌐 Form submitted → continent={}, country={}, city={}, date={}, adults={}, departure={}, destination={}",
+        log.info("🌐 Form submitted → continent={}, country={}, minPrice={}, maxPrice={}, city={}",
                 filter.getContinentName(),
                 filter.getCountryName(),
-                filter.getCityName(),
-                filter.getStartDate(),
-                filter.getNumberOfAdults(),
-                filter.getDepartureCity(),
-                filter.getDestination());
+                filter.getMinPrice(),
+                filter.getMaxPrice(),
+                filter.getCityName());
+
     }
 
     /**
