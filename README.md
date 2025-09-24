@@ -34,6 +34,7 @@ One Way Ticket Travel is a web application built with Spring Boot that allows us
 - 🔐 Foreign key-safe database reset logic
 - 🧹 Auto-reset of sample data on startup
 - 🌐 Public REST API with Swagger documentation
+- ❗ Custom exception handling with OfferNotFoundException and global @ControllerAdvice
 
 
 🔍 Application Monitoring with Aspects
@@ -51,12 +52,23 @@ OfferRestController
   ● GET /api/offers → returns all available offers
   ● POST /api/offers/search → filters offers based on SearchFilter criteria
 
+  ● GET /admin/offers?offerName=... → returns a single offer matching the provided name
+    Throws OfferNotFoundException if no match is found
+    Handled globally via GlobalException using ProblemDetail and HTTP 404
+    
 ReservationRestController
   ● POST /api/reservations/reserve/{offerId} → reserves an offer for the authenticated user
 
 Swagger UI: http://localhost:8080/swagger-ui/index.html
 
-  
+
+⚠️ Error Handling
+The application includes centralized exception handling for cleaner API responses:
+● OfferNotFoundException — thrown when an offer is not found by name
+● Handled globally via GlobalException class annotated with @ControllerAdvice
+● Returns standardized ProblemDetail with HTTP 404 status and descriptive message
+
+
 ## 🚀 Getting Started
 
 1. Clone the repository:
