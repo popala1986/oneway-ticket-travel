@@ -92,20 +92,19 @@ The application includes centralized exception handling for cleaner API response
 🗂️ Project Structure:
 
 src/
-
 └── main/ 
-    ├── java/pl/onewaytickettravel/app/
-    │   ├── controller/
-    │   ├── restController/
-    │   ├── service/
-    │   ├── repository/
-    │   ├── entities/
-    │   ├── dto/
-    │   ├── mapper/
-    │   ├── specification/
-    │   ├── model/
-    │   └── aspect/
-    └── resources/
+     ├── java/pl/onewaytickettravel/app/
+     │   ├── controller/
+     │   ├── restController/
+     │   ├── service/
+     │   ├── repository/
+     │   ├── entities/
+     │   ├── dto/
+     │   ├── mapper/
+     │   ├── specification/
+     │   ├── model/
+     │   └── aspect/
+     └── resources/
         ├── templates/
         ├── schema.sql
         └── data.sql
