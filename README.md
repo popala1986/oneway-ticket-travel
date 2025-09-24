@@ -34,6 +34,7 @@ One Way Ticket Travel is a web application built with Spring Boot that allows us
 - 🔐 Foreign key-safe database reset logic
 - 🧹 Auto-reset of sample data on startup
 - 🌐 Public REST API with Swagger documentation
+- ❗ Custom exception handling with OfferNotFoundException and global @ControllerAdvice
 
 
 🔍 Application Monitoring with Aspects
@@ -44,19 +45,38 @@ To improve observability and debugging, the application includes three dedicated
   ● These aspects provide transparent logging, performance metrics, and error tracking across the core layers of the application — without modifying business logic.
 
 
-  🌐 REST API Endpoints
+  ## 🌐 REST API Endpoints
+  
 Publicly accessible via Spring Security and documented in Swagger UI:
 
 OfferRestController
-  ● GET /api/offers → returns all available offers
-  ● POST /api/offers/search → filters offers based on SearchFilter criteria
 
+    ● GET /api/offers → returns all available offers
+  
+    ● POST /api/offers/search → filters offers based on SearchFilter criteria
+
+    ● GET /admin/offers?offerName=... → returns a single offer matching the provided name
+    Throws OfferNotFoundException if no match is found
+    Handled globally via GlobalException using ProblemDetail and HTTP 404
+    
 ReservationRestController
-  ● POST /api/reservations/reserve/{offerId} → reserves an offer for the authenticated user
+
+    ● POST /api/reservations/reserve/{offerId} → reserves an offer for the authenticated user
 
 Swagger UI: http://localhost:8080/swagger-ui/index.html
 
+
+## ⚠️ Error Handling
+
+The application includes centralized exception handling for cleaner API responses:
+
+  ● OfferNotFoundException — thrown when an offer is not found by name
   
+  ● Handled globally via GlobalException class annotated with @ControllerAdvice
+  
+  ● Returns standardized ProblemDetail with HTTP 404 status and descriptive message
+
+
 ## 🚀 Getting Started
 
 1. Clone the repository:
@@ -69,10 +89,11 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 3. Open your browser and go to:
      http://localhost:8080/
 
-🗂️ Project Structure:
+## 🗂️ Project Structure:
 
 src/
-└── main/
+└── main/ 
+
     ├── java/pl/onewaytickettravel/app/
     │   ├── controller/
     │   ├── restController/
@@ -89,43 +110,75 @@ src/
         ├── schema.sql
         └── data.sql
         
-📁 Folder Descriptions
+## 📁 Folder Descriptions
+
 ●  controller/ – Spring MVC controllers
+
 ● restController/ – REST API endpoints
+
 ● service/ – Business logic
+
 ● repository/ – JPA repositories
+
 ● entities/ – JPA entities
+
 ● dto/ – Data Transfer Objects
+
 ● mapper/ – Entity ↔ DTO mapping
+
 ● specification/ – Dynamic filtering logic
+
 ● model/ – Search filter object
+
 ● aspect/ – AOP aspects for logging and performance
+
 ● templates/ – Thymeleaf views (index.html, results.html, reservation-confirmation.html)
+
 ● schema.sql – Database schema
+
 ● data.sql – Sample data
 
-🛠️ Sample Data:
+
+## 🛠️ Sample Data:
 The data.sql file includes sample continents, countries, cities, and travel offers — for example, “Italy Sun & Pizza” with destination city “Rome”.
 
-📌 Project Status:
+
+
+## 📌 Project Status:
+
 ✅ Core functionality implemented
+
 ✅ AOP aspects for controller, service, and mapper added
+
 ✅ Reservation system with confirmation view
+
 ✅ Styled empty results alert
+
 ✅ Safe database reset logic
+
 ✅ REST API with Swagger documentation
+
 ✅ Price range filtering in search form and backend
 
-🔜 Upcoming features:
+
+
+## 🔜 Upcoming features:
+
 ● Pagination of results
+
 ● Sorting by price and date
+
 ● City autocomplete
+
 ● REST API support
+
 ● Search offers by hotel type, departure date, and number of travelers 
+
 ● User authentication and personalized reservations
+
 ● Admin panel for managing offers and reservations
 
 
-👨‍💻 Author
+## 👨‍💻 Author
 Created by Paweł Popala
 
