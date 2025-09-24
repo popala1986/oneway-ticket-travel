@@ -21,6 +21,7 @@ One Way Ticket Travel is a web application built with Spring Boot that allows us
   - Continent
   - Country
   - Destination city
+  - Price range (minPrice, maxPrice)
 - 📄 Dynamic filtering using `Specification`
 - 🗺️ Entity-to-DTO mapping
 - 🧪 Sample data via `schema.sql` and `data.sql`
