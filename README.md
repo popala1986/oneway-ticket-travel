@@ -45,7 +45,7 @@ To improve observability and debugging, the application includes three dedicated
   ● These aspects provide transparent logging, performance metrics, and error tracking across the core layers of the application — without modifying business logic.
 
 
-  🌐 REST API Endpoints
+  ## 🌐 REST API Endpoints
   
 Publicly accessible via Spring Security and documented in Swagger UI:
 
@@ -66,7 +66,7 @@ ReservationRestController
 Swagger UI: http://localhost:8080/swagger-ui/index.html
 
 
-⚠️ Error Handling
+## ⚠️ Error Handling
 
 The application includes centralized exception handling for cleaner API responses:
 
@@ -89,7 +89,7 @@ The application includes centralized exception handling for cleaner API response
 3. Open your browser and go to:
      http://localhost:8080/
 
-🗂️ Project Structure:
+## 🗂️ Project Structure:
 
 src/
 └── main/ 
@@ -110,7 +110,7 @@ src/
         ├── schema.sql
         └── data.sql
         
-📁 Folder Descriptions
+## 📁 Folder Descriptions
 
 ●  controller/ – Spring MVC controllers
 
@@ -138,10 +138,14 @@ src/
 
 ● data.sql – Sample data
 
-🛠️ Sample Data:
+
+## 🛠️ Sample Data:
 The data.sql file includes sample continents, countries, cities, and travel offers — for example, “Italy Sun & Pizza” with destination city “Rome”.
 
-📌 Project Status:
+
+
+## 📌 Project Status:
+
 ✅ Core functionality implemented
 
 ✅ AOP aspects for controller, service, and mapper added
@@ -156,7 +160,9 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 
 ✅ Price range filtering in search form and backend
 
-🔜 Upcoming features:
+
+
+## 🔜 Upcoming features:
 
 ● Pagination of results
 
@@ -173,6 +179,6 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 ● Admin panel for managing offers and reservations
 
 
-👨‍💻 Author
+## 👨‍💻 Author
 Created by Paweł Popala
 
