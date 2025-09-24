@@ -7,6 +7,7 @@ import pl.onewaytickettravel.app.entities.City;
 import pl.onewaytickettravel.app.entities.Continent;
 import pl.onewaytickettravel.app.entities.Country;
 import pl.onewaytickettravel.app.entities.Offer;
+import pl.onewaytickettravel.app.exception.OfferNotFoundException;
 import pl.onewaytickettravel.app.mapper.OfferMapper;
 import pl.onewaytickettravel.app.model.SearchFilter;
 import pl.onewaytickettravel.app.repository.CityRepository;
@@ -111,5 +112,12 @@ public class OfferService {
                         offer.getCity() != null ? offer.getCity().getName() : null,
                         offer.getStatus().name()))
                 .toList();
+    }
+
+    public OfferDto getOfferByName(String offerName) {
+        Offer offer = offerRepository.findByName(offerName)
+                .orElseThrow(() -> new OfferNotFoundException("No such offer with name '" + offerName + "' exists."));
+
+        return offerMapper.offerToOfferDto(offer);
     }
 }
