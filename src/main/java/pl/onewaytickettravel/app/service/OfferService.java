@@ -100,4 +100,18 @@ public class OfferService {
 
         return offerMapper.offerToOfferDto(savedOffer);
     }
+
+    public List<OfferDto> getAllOffers() {
+        List<Offer> offers = offerRepository.findAll();
+        return offers.stream()
+                .map(offer -> new OfferDto(
+                        offer.getId(),
+                        offer.getName(),
+                        offer.getPrice(),
+                        offer.getContinent().getName(),
+                        offer.getCountry() != null ? offer.getCountry().getName() : null,
+                        offer.getCity() != null ? offer.getCity().getName() : null,
+                        offer.getStatus().name()))
+                .toList();
+    }
 }
