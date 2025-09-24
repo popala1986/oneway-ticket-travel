@@ -3,6 +3,9 @@
 USE onewaytickettravel;
 
 -- Czyszczenie danych
+
+DELETE FROM reservations;
+ALTER TABLE reservations AUTO_INCREMENT = 1;
 DELETE FROM offers;
 ALTER TABLE offers AUTO_INCREMENT = 1;
 
