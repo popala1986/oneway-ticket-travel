@@ -92,6 +92,7 @@ The application includes centralized exception handling for cleaner API response
 🗂️ Project Structure:
 
 src/
+
 └── main/ 
     ├── java/pl/onewaytickettravel/app/
     │   ├── controller/
