@@ -46,9 +46,11 @@ To improve observability and debugging, the application includes three dedicated
 
 
   🌐 REST API Endpoints
+  
 Publicly accessible via Spring Security and documented in Swagger UI:
 
 OfferRestController
+
   ● GET /api/offers → returns all available offers
   ● POST /api/offers/search → filters offers based on SearchFilter criteria
 
