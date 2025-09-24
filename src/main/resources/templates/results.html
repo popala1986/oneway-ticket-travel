@@ -33,11 +33,16 @@
 </head>
 <body>
 
-<h1>Wyniki Wyszukiwania</h1>
+<h1 style="text-align: center; font-size: 2em; margin-bottom: 30px;">Wyniki Wyszukiwania</h1>
 
-<div th:if="${#lists.isEmpty(results)}">
-    <p>Przepraszamy, nie znaleziono ofert pasujących do podanych kryteriów.</p>
-    <p><a th:href="@{/}">Spróbuj ponownie</a></p>
+<div th:if="${#lists.isEmpty(results)}" style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+    <div style="max-width: 600px; text-align: center; background-color: #fff3cd; color: #856404; padding: 30px; border-radius: 12px; border: 1px solid #ffeeba; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
+        <h2 style="margin-top: 0; font-size: 1.8em;">⚠️ Brak wyników</h2>
+        <p style="font-size: 1.1em;">Przepraszamy, nie znaleziono ofert pasujących do podanych kryteriów.</p>
+        <a th:href="@{/}" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #007bff; color: white; text-decoration: none; font-weight: bold; border-radius: 6px; transition: background-color 0.3s;">
+            ← Powrót do wyszukiwania
+        </a>
+    </div>
 </div>
 
 <div th:unless="${#lists.isEmpty(results)}">
@@ -62,6 +67,14 @@
         <p th:if="${offer.status == 'RESERVED'}" style="color:orange;">Oferta zarezerwowana</p>
         <p th:if="${offer.status == 'CANCELLED'}" style="color:red;">Oferta anulowana</p>
 
+<!--        <div th:if="${offer.status == 'RESERVED'}">-->
+<!--            <p style="color: orange;">Oferta zarezerwowana</p>-->
+<!--        </div>-->
+
+<!--        <div th:if="${offer.status == 'CANCELLED'}">-->
+<!--            <p style="color: red;">Oferta anulowana</p>-->
+<!--        </div>-->
+
 
         <div th:if="${offer.status == 'AVAILABLE'}" class="reserve-button">
             <form th:action="@{/reservations/reserve/{id}(id=${offer.id})}" method="post">
@@ -69,15 +82,14 @@
             </form>
         </div>
 
-        <div th:if="${offer.status == 'RESERVED'}">
-            <p style="color: orange;">Oferta zarezerwowana</p>
-        </div>
 
-        <div th:if="${offer.status == 'CANCELLED'}">
-            <p style="color: red;">Oferta anulowana</p>
-        </div>
 
         <p><a th:href="@{'/offers/' + ${offer.id}}">Zobacz szczegóły &rarr;</a></p>
+
+        <div th:if="${reservedOfferId == offer.id}" style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-top: 10px;">
+            ✅ Oferta została pomyślnie zarezerwowana.
+        </div>
+
     </div>
 </div>
 
