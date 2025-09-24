@@ -26,4 +26,9 @@ public class OfferRestController {
     public List<OfferDto> getAllOffers() {
         return offerService.getAllOffers();
     }
+
+    @GetMapping("/offers")
+    public OfferDto getOfferByName(@RequestParam String offerName) {
+        return offerService.getOfferByName(offerName);
+    }
 }
