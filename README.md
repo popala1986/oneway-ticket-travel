@@ -110,18 +110,31 @@ src/
         └── data.sql
         
 📁 Folder Descriptions
+
 ●  controller/ – Spring MVC controllers
+
 ● restController/ – REST API endpoints
+
 ● service/ – Business logic
+
 ● repository/ – JPA repositories
+
 ● entities/ – JPA entities
+
 ● dto/ – Data Transfer Objects
+
 ● mapper/ – Entity ↔ DTO mapping
+
 ● specification/ – Dynamic filtering logic
+
 ● model/ – Search filter object
+
 ● aspect/ – AOP aspects for logging and performance
+
 ● templates/ – Thymeleaf views (index.html, results.html, reservation-confirmation.html)
+
 ● schema.sql – Database schema
+
 ● data.sql – Sample data
 
 🛠️ Sample Data:
