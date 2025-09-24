@@ -51,16 +51,17 @@ Publicly accessible via Spring Security and documented in Swagger UI:
 
 OfferRestController
 
-  ● GET /api/offers → returns all available offers
+    ● GET /api/offers → returns all available offers
   
-  ● POST /api/offers/search → filters offers based on SearchFilter criteria
+    ● POST /api/offers/search → filters offers based on SearchFilter criteria
 
-  ● GET /admin/offers?offerName=... → returns a single offer matching the provided name
+    ● GET /admin/offers?offerName=... → returns a single offer matching the provided name
     Throws OfferNotFoundException if no match is found
     Handled globally via GlobalException using ProblemDetail and HTTP 404
     
 ReservationRestController
-  ● POST /api/reservations/reserve/{offerId} → reserves an offer for the authenticated user
+
+    ● POST /api/reservations/reserve/{offerId} → reserves an offer for the authenticated user
 
 Swagger UI: http://localhost:8080/swagger-ui/index.html
 
