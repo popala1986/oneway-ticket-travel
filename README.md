@@ -28,11 +28,11 @@ One Way Ticket Travel is a web application built with Spring Boot that allows us
 - 📊 Transparent logging and performance monitoring via AOP aspects
 - ✅ Offer reservation system with status tracking (AVAILABLE, RESERVED, CANCELLED)
 - 📩 Reservation confirmation view with offer details
-🔁 Return-to-search navigation after booking
-⚠️ Styled alert for empty search results
-🔐 Foreign key-safe database reset logic
-🧹 Auto-reset of sample data on startup
-🌐 Public REST API with Swagger documentation
+- 🔁 Return-to-search navigation after booking
+- ⚠️ Styled alert for empty search results
+- 🔐 Foreign key-safe database reset logic
+- 🧹 Auto-reset of sample data on startup
+- 🌐 Public REST API with Swagger documentation
 
 
 🔍 Application Monitoring with Aspects
