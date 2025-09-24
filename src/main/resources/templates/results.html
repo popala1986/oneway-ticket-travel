@@ -67,22 +67,11 @@
         <p th:if="${offer.status == 'RESERVED'}" style="color:orange;">Oferta zarezerwowana</p>
         <p th:if="${offer.status == 'CANCELLED'}" style="color:red;">Oferta anulowana</p>
 
-<!--        <div th:if="${offer.status == 'RESERVED'}">-->
-<!--            <p style="color: orange;">Oferta zarezerwowana</p>-->
-<!--        </div>-->
-
-<!--        <div th:if="${offer.status == 'CANCELLED'}">-->
-<!--            <p style="color: red;">Oferta anulowana</p>-->
-<!--        </div>-->
-
-
         <div th:if="${offer.status == 'AVAILABLE'}" class="reserve-button">
             <form th:action="@{/reservations/reserve/{id}(id=${offer.id})}" method="post">
                 <button type="submit">Zarezerwuj</button>
             </form>
         </div>
-
-
 
         <p><a th:href="@{'/offers/' + ${offer.id}}">Zobacz szczegóły &rarr;</a></p>
 
