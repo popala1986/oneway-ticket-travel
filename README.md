@@ -1,6 +1,5 @@
-# ✈️ One Way Ticket Travel
-
-**One Way Ticket Travel** is a web application built with Spring Boot that allows users to search for travel offers using dynamic filters such as continent, country, destination city.
+✈️ One Way Ticket Travel
+One Way Ticket Travel is a web application built with Spring Boot that allows users to search for travel offers using dynamic filters such as continent, country, and destination city. Users can reserve offers, view confirmation details, and enjoy a clean, responsive interface.
 
 ## 📦 Technologies Used
 
@@ -24,6 +23,12 @@
 - 🧪 Sample data via `schema.sql` and `data.sql`
 - 🎨 Clean and responsive UI with search form and results view
 - 📊 Transparent logging and performance monitoring via AOP aspects
+- ✅ Offer reservation system with status tracking (AVAILABLE, RESERVED, CANCELLED)
+- 📩 Reservation confirmation view with offer details
+🔁 Return-to-search navigation after booking
+⚠️ Styled alert for empty search results
+🔐 Foreign key-safe database reset logic
+🧹 Auto-reset of sample data on startup
 
 🔍 Application Monitoring with Aspects
 To improve observability and debugging, the application includes three dedicated aspects:
@@ -73,7 +78,7 @@ src/
 ● specification/ – Dynamic filtering logic
 ● model/ – Search filter object
 ● aspect/ – AOP aspects for logging and performance
-● templates/ – Thymeleaf views (index.html, results.html)
+● templates/ – Thymeleaf views (index.html, results.html, reservation-confirmation.html)
 ● schema.sql – Database schema
 ● data.sql – Sample data
 
@@ -83,6 +88,9 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 📌 Project Status:
 ✅ Core functionality implemented
 ✅ AOP aspects for controller, service, and mapper added
+✅ Reservation system with confirmation view
+✅ Styled empty results alert
+✅ Safe database reset logic
 
 🔜 Upcoming features:
 ● Pagination of results
@@ -90,6 +98,9 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 ● City autocomplete
 ● REST API support
 ● Search offers by hotel type, departure date, and number of travelers 
+● User authentication and personalized reservations
+● Admin panel for managing offers and reservations
+
 
 👨‍💻 Author
 Created by Paweł Popala
