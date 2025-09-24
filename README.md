@@ -71,7 +71,9 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 The application includes centralized exception handling for cleaner API responses:
 
   ● OfferNotFoundException — thrown when an offer is not found by name
+  
   ● Handled globally via GlobalException class annotated with @ControllerAdvice
+  
   ● Returns standardized ProblemDetail with HTTP 404 status and descriptive message
 
 
