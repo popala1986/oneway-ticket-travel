@@ -139,18 +139,25 @@ src/
 ● data.sql – Sample data
 
 
+
+
 ## 🛠️ Sample Data:
 The data.sql file includes sample continents, countries, cities, and travel offers — for example, “Italy Sun & Pizza” with destination city “Rome”.
+
+
 
 
 
 🧪 Testing Strategy
 The application includes both unit and integration tests to ensure reliability and correctness across layers.
 
+
 ✅ Unit Tests
 OfferServiceTest uses Mockito to mock dependencies and verify business logic.
 
 Focuses on mapping and service behavior without touching the database.
+
+
 
 ✅ Integration Tests
 OfferServiceIntegrationTest verifies that offers are correctly loaded from the test database.
@@ -158,6 +165,8 @@ OfferServiceIntegrationTest verifies that offers are correctly loaded from the t
 OfferRepositoryIntegrationTest checks that specific offers (e.g. “Maroko All Inclusive”) are retrievable and correctly mapped.
 
 OnewayTicketTravelApplicationTests ensures that the Spring Boot context loads successfully under the test profile.
+
+
 
 🧪 Test Profile Configuration
 Dedicated application-test.properties enables isolated test environment.
