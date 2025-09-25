@@ -148,7 +148,7 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 
 
 
-🧪 Testing Strategy
+## 🧪 Testing Strategy
 The application includes both unit and integration tests to ensure reliability and correctness across layers.
 
 
