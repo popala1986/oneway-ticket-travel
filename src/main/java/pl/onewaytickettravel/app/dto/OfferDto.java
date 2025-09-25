@@ -3,16 +3,80 @@ package pl.onewaytickettravel.app.dto;
 
 import java.math.BigDecimal;
 
+
+/**
+ * Obiekt DTO reprezentujący ofertę turystyczną.
+ * Używany do przesyłania danych między warstwami aplikacji bez ujawniania encji.
+ *
+ * Data Transfer Object representing a travel offer.
+ * Used to transfer data between application layers without exposing the entity.
+ */
 public class OfferDto {
 
+
+    /**
+     * Identyfikator oferty.
+     * Offer identifier.
+     */
     private Long id;
+
+    /**
+     * Nazwa oferty.
+     * Offer name.
+     */
     private String name;
+
+    /**
+     * Cena oferty.
+     * Offer price.
+     */
     private BigDecimal price;
+
+    /**
+     * Nazwa kontynentu, do którego należy oferta.
+     * Name of the continent associated with the offer.
+     */
     private String continentName;
+
+    /**
+     * Nazwa kraju, do którego należy oferta.
+     * Name of the country associated with the offer.
+     */
     private String countryName;
+
+    /**
+     * Nazwa miasta docelowego oferty.
+     * Name of the destination city for the offer.
+     */
     private String cityName;
+
+    /**
+     * Konstruktor domyślny.
+     * Default constructor.
+     */
     private String status;
 
+
+    /**
+     * Konstruktor inicjalizujący wszystkie pola DTO.
+     *
+     * Constructor initializing all DTO fields.
+     *
+     * @param id identyfikator oferty
+     *           offer ID
+     * @param name nazwa oferty
+     *             offer name
+     * @param price cena oferty
+     *              offer price
+     * @param continentName nazwa kontynentu
+     *                      continent name
+     * @param countryName nazwa kraju
+     *                    country name
+     * @param cityName nazwa miasta
+     *                 city name
+     * @param status status oferty
+     *               offer status
+     */
     public OfferDto() {
     }
 
