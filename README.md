@@ -63,7 +63,7 @@ ReservationRestController
 
     ● POST /api/reservations/reserve/{offerId} → reserves an offer for the authenticated user
 
-Swagger UI: http://localhost:8080/swagger-ui/index.html
+Swagger UI: http://localhost:8080/swagger
 
 
 ## ⚠️ Error Handling
