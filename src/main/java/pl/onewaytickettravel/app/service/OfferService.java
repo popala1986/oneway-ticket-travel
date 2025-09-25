@@ -20,23 +20,93 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import org.slf4j.Logger;
 
-
+/**
+ * Serwis odpowiedzialny za logikę biznesową związaną z ofertami turystycznymi.
+ * Obsługuje wyszukiwanie, zapis, pobieranie i mapowanie danych ofert.
+ *
+ * Service responsible for business logic related to travel offers.
+ * Handles searching, saving, retrieving, and mapping offer data.
+ */
 @Service
 @Transactional
 public class OfferService {
 
+    /**
+     * Logger do rejestrowania informacji o przetwarzanych ofertach.
+     * Logger for recording information about processed offers.
+     */
     private static final Logger logger = LoggerFactory.getLogger(OfferService.class);
 
+
+    /**
+     * Komunikat używany przy braku encji w bazie danych.
+     * Message used when an entity is not found in the database.
+     */
     private static final String NOT_FOUND_MESSAGE = " not found.";
 
 
-
+    /**
+     * Repozytorium ofert turystycznych.
+     * Umożliwia operacje CRUD oraz filtrowanie ofert.
+     *
+     * Repository for travel offers.
+     * Enables CRUD operations and offer filtering.
+     */
     private final OfferRepository offerRepository;
+
+    /**
+     * Repozytorium kontynentów.
+     * Służy do pobierania danych lokalizacyjnych dla ofert.
+     *
+     * Repository for continents.
+     * Used to retrieve location data for offers.
+     */
     private final ContinentRepository continentRepository;
+
+    /**
+     * Repozytorium krajów.
+     * Wspiera mapowanie lokalizacji oferty.
+     *
+     * Repository for countries.
+     * Supports offer location mapping.
+     */
     private final CountryRepository countryRepository;
+
+    /**
+     * Mapper DTO ↔ encja dla obiektów ofert.
+     * Umożliwia konwersję między warstwami aplikacji.
+     *
+     * DTO ↔ entity mapper for offer objects.
+     * Enables conversion between application layers.
+     */
     private final OfferMapper offerMapper;
+
+    /**
+     * Repozytorium miast.
+     * Wykorzystywane przy przypisywaniu lokalizacji do oferty.
+     *
+     * Repository for cities.
+     * Used when assigning location to an offer.
+     */
     private final CityRepository cityRepository;
 
+
+    /**
+     * Konstruktor inicjalizujący serwis wymaganymi zależnościami.
+     *
+     * Constructor initializing the service with required dependencies.
+     *
+     * @param offerRepository repozytorium ofert
+     *                        offer repository
+     * @param continentRepository repozytorium kontynentów
+     *                            continent repository
+     * @param countryRepository repozytorium krajów
+     *                          country repository
+     * @param offerMapper mapper DTO ↔ encja
+     *                    DTO ↔ entity mapper
+     * @param cityRepository repozytorium miast
+     *                       city repository
+     */
     public OfferService(OfferRepository offerRepository,
                         ContinentRepository continentRepository,
                         CountryRepository countryRepository,
@@ -50,16 +120,16 @@ public class OfferService {
 
     /**
      * Wyszukuje oferty na podstawie dynamicznego filtra.
-     * @param filter Obiekt z kryteriami wyszukiwania.
-     * @return Lista znalezionych ofert w formacie DTO.
-     */
-
-    /**
+     * Używa specyfikacji JPA do budowania zapytania.
+     *
      * Searches for offers based on dynamic filter criteria.
-     * @param filter Object containing search parameters.
-     * @return List of matching offers in DTO format.
+     * Uses JPA specification to build the query.
+     *
+     * @param filter obiekt z kryteriami wyszukiwania
+     *               object containing search parameters
+     * @return lista pasujących ofert w formacie DTO
+     *         list of matching offers in DTO format
      */
-
     @Transactional(readOnly = true)
     public List<OfferDto> searchOffers(SearchFilter filter) {
         OfferSpecification spec = new OfferSpecification(filter);
@@ -75,17 +145,17 @@ public class OfferService {
     }
 
     /**
-     * Zapisuje nową ofertę lub aktualizuje istniejącą na podstawie DTO.
-     * @param offerDto Dane oferty.
-     * @return Zapisana oferta w formacie DTO.
+     * Zapisuje nową ofertę lub aktualizuje istniejącą na podstawie danych DTO.
+     * Wyszukuje powiązane encje lokalizacyjne i mapuje DTO na encję.
+     *
+     * Saves a new offer or updates an existing one based on DTO data.
+     * Looks up related location entities and maps DTO to entity.
+     *
+     * @param offerDto dane oferty
+     *                 offer data
+     * @return zapisana oferta w formacie DTO
+     *         saved offer in DTO format
      */
-
-    /**
-     * Saves a new offer or updates an existing one based on the provided DTO.
-     * @param offerDto Offer data.
-     * @return The saved offer in DTO format.
-     */
-
     public OfferDto saveOffer(OfferDto offerDto) {
         Continent continent = continentRepository.findByNameIgnoreCase(offerDto.getContinentName())
                 .orElseThrow(() -> new NoSuchElementException("Continent with name " + offerDto.getContinentName() + NOT_FOUND_MESSAGE));
@@ -108,6 +178,14 @@ public class OfferService {
         return offerMapper.offerToOfferDto(savedOffer);
     }
 
+    /**
+     * Pobiera wszystkie oferty z bazy danych.
+     *
+     * Retrieves all offers from the database.
+     *
+     * @return lista wszystkich ofert w formacie DTO
+     *         list of all offers in DTO format
+     */
     public List<OfferDto> getAllOffers() {
         List<Offer> offers = offerRepository.findAll();
         return offers.stream()
@@ -115,6 +193,18 @@ public class OfferService {
                 .toList();
     }
 
+    /**
+     * Pobiera ofertę na podstawie jej nazwy.
+     * Rzuca wyjątek, jeśli oferta nie istnieje.
+     *
+     * Retrieves an offer by its name.
+     * Throws an exception if the offer does not exist.
+     *
+     * @param offerName nazwa oferty
+     *                  offer name
+     * @return obiekt DTO odpowiadający nazwie
+     *         DTO object matching the name
+     */
     public OfferDto getOfferByName(String offerName) {
         Offer offer = offerRepository.findByName(offerName)
                 .orElseThrow(() -> new OfferNotFoundException("No such offer with name '" + offerName + "' exists."));
