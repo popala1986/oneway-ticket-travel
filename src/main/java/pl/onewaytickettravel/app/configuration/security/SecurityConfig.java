@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,6 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import pl.onewaytickettravel.app.auth.service.MyUserDetailsService;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final MyUserDetailsService userDetailsService;
@@ -40,16 +42,16 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/**",
-                                "/swagger-ui/**",
+                                "/swagger/**",
                                 "/v3/api-docs/**",
+                                "/swagger-ui/**",
                                 "/css/**", "/js/**", "/images/**"
                         ).permitAll()
-                        .requestMatchers("/", "/search", "/reservations/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .usernameParameter("email") // nadal używamy email jako login
-                        .defaultSuccessUrl("/", true) // przekierowanie po zalogowaniu
+                        .usernameParameter("email")
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll);
