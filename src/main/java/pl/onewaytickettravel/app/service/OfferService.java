@@ -1,5 +1,6 @@
 package pl.onewaytickettravel.app.service;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.onewaytickettravel.app.dto.OfferDto;
@@ -17,11 +18,18 @@ import pl.onewaytickettravel.app.repository.OfferRepository;
 import pl.onewaytickettravel.app.specification.OfferSpecification;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
+import org.slf4j.Logger;
+
 
 @Service
 @Transactional
 public class OfferService {
+
+    private static final Logger logger = LoggerFactory.getLogger(OfferService.class);
+
+    private static final String NOT_FOUND_MESSAGE = " not found.";
+
+
 
     private final OfferRepository offerRepository;
     private final ContinentRepository continentRepository;
@@ -58,12 +66,12 @@ public class OfferService {
         List<Offer> rawOffers = offerRepository.findAll(spec);
         rawOffers.forEach(o -> {
             String city = (o.getCity() != null) ? o.getCity().getName() : "brak miasta";
-            System.out.println("→ " + o.getName() + " | Miasto: " + city);
+            logger.info("→ {} | Miasto: {}", o.getName(), city);
         });
 
         return rawOffers.stream()
                 .map(offerMapper::offerToOfferDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     /**
@@ -80,18 +88,18 @@ public class OfferService {
 
     public OfferDto saveOffer(OfferDto offerDto) {
         Continent continent = continentRepository.findByNameIgnoreCase(offerDto.getContinentName())
-                .orElseThrow(() -> new NoSuchElementException("Continent with name " + offerDto.getContinentName() + " not found."));
+                .orElseThrow(() -> new NoSuchElementException("Continent with name " + offerDto.getContinentName() + NOT_FOUND_MESSAGE));
 
         Country country = null;
         if (offerDto.getCountryName() != null && !offerDto.getCountryName().isBlank()) {
             country = countryRepository.findByNameIgnoreCase(offerDto.getCountryName())
-                    .orElseThrow(() -> new NoSuchElementException("Country with name " + offerDto.getCountryName() + " not found."));
+                    .orElseThrow(() -> new NoSuchElementException("Country with name " + offerDto.getCountryName() + NOT_FOUND_MESSAGE));
         }
 
         City city = null;
         if (offerDto.getCityName() != null && !offerDto.getCityName().isBlank()) {
             city = cityRepository.findByNameIgnoreCase(offerDto.getCityName())
-                    .orElseThrow(() -> new NoSuchElementException("City with name " + offerDto.getCityName() + " not found."));
+                    .orElseThrow(() -> new NoSuchElementException("City with name " + offerDto.getCityName() + NOT_FOUND_MESSAGE));
         }
 
         Offer offerToSave = offerMapper.offerDtoToOffer(offerDto, continent, country,city);
@@ -103,14 +111,7 @@ public class OfferService {
     public List<OfferDto> getAllOffers() {
         List<Offer> offers = offerRepository.findAll();
         return offers.stream()
-                .map(offer -> new OfferDto(
-                        offer.getId(),
-                        offer.getName(),
-                        offer.getPrice(),
-                        offer.getContinent().getName(),
-                        offer.getCountry() != null ? offer.getCountry().getName() : null,
-                        offer.getCity() != null ? offer.getCity().getName() : null,
-                        offer.getStatus().name()))
+                .map(offerMapper::offerToOfferDto)
                 .toList();
     }
 
