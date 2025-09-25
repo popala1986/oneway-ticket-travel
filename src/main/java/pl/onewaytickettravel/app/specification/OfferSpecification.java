@@ -11,14 +11,52 @@ import pl.onewaytickettravel.app.model.SearchFilter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Specyfikacja JPA umożliwiająca dynamiczne filtrowanie ofert turystycznych.
+ * Buduje zapytanie na podstawie kryteriów przekazanych w obiekcie SearchFilter.
+ *
+ * JPA specification enabling dynamic filtering of travel offers.
+ * Constructs a query based on criteria provided in the SearchFilter object.
+ */
 public class OfferSpecification implements Specification<Offer> {
 
+
+    /**
+     * Obiekt zawierający kryteria wyszukiwania.
+     * Object containing search criteria.
+     */
     private final SearchFilter filter;
 
+
+    /**
+     * Konstruktor inicjalizujący specyfikację z filtrem wyszukiwania.
+     *
+     * Constructor initializing the specification with a search filter.
+     *
+     * @param filter obiekt SearchFilter z kryteriami
+     *               SearchFilter object with criteria
+     */
     public OfferSpecification(SearchFilter filter) {
         this.filter = filter;
     }
 
+
+    /**
+     * Buduje predykaty (warunki WHERE) na podstawie przekazanych kryteriów.
+     * Uwzględnia nazwę kontynentu, kraju, miasta oraz zakres cenowy.
+     *
+     * Builds predicates (WHERE conditions) based on provided criteria.
+     * Includes continent, country, city names and price range.
+     *
+     * @param root encja główna (Offer)
+     *             root entity (Offer)
+     * @param query zapytanie kryterialne
+     *              criteria query
+     * @param builder konstruktor predykatów
+     *                predicate builder
+     * @return połączony predykat z wszystkimi warunkami
+     *         combined predicate with all conditions
+     */
     @Override
     public Predicate toPredicate(Root<Offer> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         List<Predicate> predicates = new ArrayList<>();
