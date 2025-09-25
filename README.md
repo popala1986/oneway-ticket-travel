@@ -144,6 +144,34 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 
 
 
+🧪 Testing Strategy
+The application includes both unit and integration tests to ensure reliability and correctness across layers.
+
+✅ Unit Tests
+OfferServiceTest uses Mockito to mock dependencies and verify business logic.
+
+Focuses on mapping and service behavior without touching the database.
+
+✅ Integration Tests
+OfferServiceIntegrationTest verifies that offers are correctly loaded from the test database.
+
+OfferRepositoryIntegrationTest checks that specific offers (e.g. “Maroko All Inclusive”) are retrievable and correctly mapped.
+
+OnewayTicketTravelApplicationTests ensures that the Spring Boot context loads successfully under the test profile.
+
+🧪 Test Profile Configuration
+Dedicated application-test.properties enables isolated test environment.
+
+Test database is initialized using:
+
+schema-test.sql — defines test schema
+
+data-test.sql — inserts sample test data
+
+SQL initialization is configured to run automatically on test startup.
+
+
+
 ## 📌 Project Status:
 
 ✅ Core functionality implemented
@@ -159,6 +187,10 @@ The data.sql file includes sample continents, countries, cities, and travel offe
 ✅ REST API with Swagger documentation
 
 ✅ Price range filtering in search form and backend
+
+✅ Unit and integration tests for OfferService and OfferRepository
+
+✅ Test profile with SQL fixtures and context loading verification
 
 
 
