@@ -1,5 +1,6 @@
 package pl.onewaytickettravel.app.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import pl.onewaytickettravel.app.auth.entities.User;
 import pl.onewaytickettravel.app.auth.repository.UserRepository;
@@ -70,6 +71,12 @@ public class ReservationService {
      * Reserves an offer for the logged-in user.
      * Validates offer availability, user existence, and uniqueness of reservation.
      *
+     * Metoda wykonuje operacje zapisu rezerwacji oraz zmiany statusu oferty w pojedynczej transakcji.
+     * W przypadku błędu wszystkie zmiany zostaną wycofane.
+     *
+     * The method performs reservation persistence and updates offer status within a single transaction.
+     * On error, all changes will be rolled back.
+     *
      * @param offerId identyfikator oferty
      *                offer ID
      * @param email adres e-mail użytkownika
@@ -79,6 +86,7 @@ public class ReservationService {
      * @throws IllegalStateException jeśli oferta jest niedostępna lub już zarezerwowana przez użytkownika
      *                               if offer is unavailable or already reserved by the user
      */
+    @Transactional
     public void reserveOffer(Long offerId, String email) {
         Offer offer = offerRepository.findById(offerId)
                 .orElseThrow(() -> new IllegalArgumentException("Nie znaleziono oferty o ID: " + offerId));
