@@ -40,7 +40,6 @@ public class MyAspectClassExercise2 {
      */
     @Before("serviceMethod()")
     public void showMeTextBeforeServiceMethod() {
-        System.out.println(" =====>I will reserved the offer for the moment from service");
-    }
+        System.out.println("Service method is about to be executed.");    }
 
 }
