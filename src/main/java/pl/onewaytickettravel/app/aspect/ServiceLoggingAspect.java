@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class MyAspectClassExercise2 {
+public class ServiceLoggingAspect {
 
 
     /**
