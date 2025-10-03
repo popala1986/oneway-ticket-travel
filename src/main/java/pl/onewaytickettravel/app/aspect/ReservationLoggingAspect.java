@@ -8,10 +8,13 @@ import org.springframework.stereotype.Component;
 
 /**
  * EN: Aspect class responsible for logging method calls related to offer reservation.
- *     It uses Spring AOP to intercept specific method executions in the service and controller layers.
+ *     Uses Spring AOP to intercept specific method executions in the service and controller layers.
+ *     Marked with @Order(2), ensuring it executes after higher-priority aspects on shared join points.
  *
  * PL: Klasa aspektu odpowiedzialna za logowanie wywołań metod związanych z rezerwacją ofert.
  *     Wykorzystuje Spring AOP do przechwytywania wybranych metod w warstwie serwisowej i kontrolerze.
+ *     Oznaczona adnotacją @Order(2), co zapewnia jej wykonanie po aspektach o wyższym priorytecie
+ *     na wspólnych punktach przecięcia.
  */
 @Aspect
 @Component
