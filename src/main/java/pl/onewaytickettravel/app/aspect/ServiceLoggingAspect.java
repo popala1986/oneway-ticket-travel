@@ -8,10 +8,13 @@ import org.springframework.stereotype.Component;
 
 /**
  * EN: Aspect class responsible for logging method calls within the service layer of the application.
- *     Using Spring AOP allows separation of technical concerns (like logging) from business logic.
+ *     Uses Spring AOP to separate technical concerns (such as logging) from business logic.
+ *     Marked with @Order(1) to ensure it executes before other aspects on shared join points.
  *
  * PL: Klasa aspektu odpowiedzialna za logowanie wywołań metod w warstwie serwisowej aplikacji.
- *     Zastosowanie Spring AOP pozwala oddzielić logikę techniczną (np. logowanie) od logiki biznesowej.
+ *     Wykorzystuje Spring AOP do oddzielenia logiki technicznej (np. logowania) od logiki biznesowej.
+ *     Oznaczona adnotacją @Order(1), co zapewnia jej wcześniejsze wykonanie względem innych aspektów
+ *     na wspólnych punktach przecięcia.
  */
 
 @Aspect
