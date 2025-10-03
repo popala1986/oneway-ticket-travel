@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class MyAspectClassExercise {
+public class ReservationLoggingAspect {
 
     /**
      * EN: Logs a message before any execution of the reserveOffer(...) method in ReservationService.
