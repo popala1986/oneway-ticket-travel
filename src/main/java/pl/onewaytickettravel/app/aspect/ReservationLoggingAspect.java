@@ -3,6 +3,7 @@ package pl.onewaytickettravel.app.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
+@Order(2)
 public class ReservationLoggingAspect {
 
     /**
@@ -26,15 +28,6 @@ public class ReservationLoggingAspect {
     }
 
     /**
-     * EN: Logs a message before any execution of the reserveOffer(...) method in ReservationController.
-     * PL: Loguje komunikat przed każdym wywołaniem metody reserveOffer(...) w klasie ReservationController.
-     */
-    @Before("execution(* pl.onewaytickettravel.app.controller.ReservationController.reserveOffer(..))")
-    public void showMeTextBeforeYouReserveOfferFromController() {
-        System.out.println("➡ ReservationController.reserveOffer(...) is about to be executed.");
-    }
-
-    /**
      * EN: Logs a message before execution of reserveOffer(Long, String) in ReservationService.
      * PL: Loguje komunikat przed wywołaniem metody reserveOffer(Long, String) w klasie ReservationService.
      */
@@ -42,10 +35,5 @@ public class ReservationLoggingAspect {
     public void showMeTextBeforeYouReserveOfferFromControllerWithLongAndString() {
         System.out.println("reserveOffer(Long, String) in ReservationService is about to be executed.");
     }
-
-    /**
-     * EN: Logs a message before execution of reserveOffer(Long) in ReservationService.
-     * PL: Loguje komunikat przed wywołaniem metody reserveOffer(Long) w klasie ReservationService.
-     */
 }
 
